@@ -375,3 +375,22 @@ details p { margin-bottom: 20px; }
 .service-help { background: var(--pink-mid); box-shadow: 0 10px 0 var(--pink); align-items: center; text-align: center; justify-content: center; }
 .service-help img { width: 110px; height: 110px; }
 .service-help .btn { align-self: center; margin-top: 8px; }
+
+/* Never stretch photos: keep their natural shape */
+img { height: auto; }
+
+/* Home hero: headline + intro side by side, team photo full width below */
+.hero-grid { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 24px 56px; }
+.hero h1 { max-width: 12ch; margin: 0; }
+.hero-side .lede { margin-bottom: 24px; }
+.hero-side .proof { margin-top: 22px; }
+.hero-photo { grid-column: 1 / -1; margin: 40px 0 0; }
+.hero-photo img { width: 100%; }
+.hero-photo figcaption { text-align: center; margin-top: 28px; font-size: 1rem; }
+.sparkle.s1 { width: 56px; height: 56px; top: -30px; right: 40px; }
+.sparkle.s2 { width: 30px; height: 30px; top: 10px; right: -12px; }
+.sparkle.s3 { width: 40px; height: 40px; bottom: 60px; left: -24px; }
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo { margin-top: 16px; }
+}
