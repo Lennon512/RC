@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reviews | Rose's Cleaning Services</title>
+  <meta name="description" content="What clients say about Rose's Cleaning Services in Burnet, Marble Falls and the Texas Hill Country.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="images/logo.png">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <svg class="swoosh swoosh-left" viewBox="0 0 520 760" aria-hidden="true">
+        <path d="M0 0 H260 C150 160 330 300 220 470 C140 600 230 690 300 760 H0 Z" fill="var(--pink-soft)"/>
+        <path d="M0 0 H180 C80 170 250 300 150 470 C80 590 150 690 210 760 H0 Z" fill="var(--pink)" opacity=".35"/>
+      </svg>
+      <div class="wrap">
+        <h1>What our clients say</h1>
+        <p>175+ Hill Country clients trust us with their homes and businesses.</p>
+      </div>
+    </section>
+
+    <section class="band-white">
+      <div class="wrap">
+        <div id="reviewList"></div>
+        <div class="empty" id="reviewEmpty" hidden>
+          <img src="images/logo.png" alt="">
+          <h2>Client reviews are coming soon</h2>
+          <p>In the meantime, you can read what clients say about us on our Facebook page.</p>
+          <div class="btn-row">
+            <a class="btn" data-config="facebookLink">Read reviews on Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-pink">
+      <div class="wrap split">
+        <div>
+          <h2 class="section-title">Had us out recently?</h2>
+          <p class="section-intro">We'd love to hear how we did. A quick review helps your neighbors find a cleaner they can trust.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-pink" data-config="facebookLink">Leave a review on Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="book">
+      <div class="wrap book-panel">
+        <img src="images/logo.png" alt="">
+        <div>
+          <h2 class="section-title">Ready for a clean home?</h2>
+          <p>Book online in a couple of minutes, or reach out and we'll help you pick the right service.</p>
+        </div>
+        <div class="book-actions">
+          <a class="btn" data-config="bookingLink">Book online</a>
+          <a data-config="phoneLink">Call <span data-config="phone"></span></a>
+          <a data-config="textLink">Text <span data-config="phone"></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="script.js"></script>
+</body>
+</html>

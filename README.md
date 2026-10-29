@@ -1,21 +1,27 @@
-# RC: Rose's Cleaning website
+# RC: Rose's Cleaning Services website
 
-Website for Rose's Cleaning (Texas Hill Country): services, how it works, FAQ and booking.
+Website for Rose's Cleaning Services in Burnet and the Texas Hill Country.
 
-## Editing business details
+## Pages
 
-Open `script.js`. The `CONFIG` section at the top holds the phone number, the online booking link (ZenMaid), the hiring form link and the Facebook link. The service list (names, descriptions, what's included) is in `SERVICES` right below it.
+- `index.html`: home (services, how it works, service area, FAQ)
+- `about.html`: about us, values, team
+- `reviews.html`: client reviews
+- `contact.html`: service area, map and contact info
+- `careers.html`: join our team (links to the hiring application)
 
-## Booking
+The header and footer are shared and built by `script.js`, so menu changes happen in one place.
 
-All "Book online" and "Book this" buttons go to the business's ZenMaid booking page, so bookings land in their existing scheduling system.
+## Editing
+
+Open `script.js`:
+
+- `CONFIG`: phone, email, address, booking link (ZenMaid), hiring form, Facebook, towns served
+- `REVIEWS`: paste real client reviews here (word for word, with their OK); the Reviews page shows them automatically and shows a "read on Facebook" message until there are some
+- `SERVICES`: service names, descriptions and checklists
+
+Images live in `images/` (`logo.png`, `team.jpg`). Swap in higher-quality originals with the same file names to sharpen them.
 
 ## Publishing with GitHub Pages
 
-In the repo on GitHub: **Settings → Pages → Source: Deploy from a branch → main / (root) → Save**. The site will be live at `https://lennon512.github.io/RC/` in a minute or two.
-
-## Files
-
-- `index.html`: page content
-- `styles.css`: design
-- `script.js`: business details, services list
+Settings → Pages → Source: Deploy from a branch → main / (root) → Save. Live at `https://lennon512.github.io/RC/`.

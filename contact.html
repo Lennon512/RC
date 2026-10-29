@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Service area & contact | Rose's Cleaning Services</title>
+  <meta name="description" content="Rose's Cleaning serves Burnet, Marble Falls, Granite Shoals, Kingsland, Buchanan Dam, Llano and Burnet, Llano and Williamson counties. Call (512) 705-8505.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="images/logo.png">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <svg class="swoosh swoosh-left" viewBox="0 0 520 760" aria-hidden="true">
+        <path d="M0 0 H260 C150 160 330 300 220 470 C140 600 230 690 300 760 H0 Z" fill="var(--pink-soft)"/>
+        <path d="M0 0 H180 C80 170 250 300 150 470 C80 590 150 690 210 760 H0 Z" fill="var(--pink)" opacity=".35"/>
+      </svg>
+      <div class="wrap">
+        <h1>Service area & contact</h1>
+        <p>Based in Burnet, we clean homes and businesses across the Highland Lakes and the Texas Hill Country.</p>
+      </div>
+    </section>
+
+    <section class="band-white">
+      <div class="wrap split">
+        <div>
+          <h2 class="section-title">Get in touch</h2>
+          <ul class="contact-list">
+            <li><strong>Call or text</strong><a data-config="phoneLink"><span data-config="phone"></span></a></li>
+            <li><strong>Email</strong><a data-config="emailLink"><span data-config="email"></span></a></li>
+            <li><strong>Address</strong><a data-config="mapLink"><span data-config="address"></span></a></li>
+            <li><strong>Facebook</strong><a data-config="facebookLink">Rose's Cleaning</a></li>
+          </ul>
+          <div class="btn-row" style="margin-top:32px">
+            <a class="btn" data-config="bookingLink">Book online</a>
+            <a class="btn btn-outline" data-config="textLink">Send a text</a>
+          </div>
+        </div>
+        <iframe class="map" title="Map of Rose's Cleaning in Burnet, Texas" loading="lazy"
+          src="https://maps.google.com/maps?q=109%20S%20Water%20St%2C%20Burnet%2C%20TX%2078611&z=10&output=embed"></iframe>
+      </div>
+    </section>
+
+    <section class="band-teal">
+      <div class="wrap">
+        <h2 class="section-title">Towns and counties we serve</h2>
+        <p class="section-intro">Don't see your town? Call or text us. If we can reach you, we'll be happy to help.</p>
+        <ul class="towns" data-towns></ul>
+      </div>
+    </section>
+
+    <section class="book">
+      <div class="wrap book-panel">
+        <img src="images/logo.png" alt="">
+        <div>
+          <h2 class="section-title">Ready for a clean home?</h2>
+          <p>Book online in a couple of minutes, or reach out and we'll help you pick the right service.</p>
+        </div>
+        <div class="book-actions">
+          <a class="btn" data-config="bookingLink">Book online</a>
+          <a data-config="phoneLink">Call <span data-config="phone"></span></a>
+          <a data-config="textLink">Text <span data-config="phone"></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="script.js"></script>
+</body>
+</html>
