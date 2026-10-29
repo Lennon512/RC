@@ -1,22 +1,16 @@
-# RC: Roses Cleaning Service website
+# RC: Rose's Cleaning website
 
-A simple website for Roses Cleaning Service where customers can see the services and request a booking.
+Website for Rose's Cleaning (Texas Hill Country): services, how it works, FAQ and booking.
 
-## Before going live
+## Before going live## Editing business details
 
-Open `script.js` and fill in the `CONFIG` section at the top:
+Open `script.js`. The `CONFIG` section at the top holds the phone number, the online booking link (ZenMaid), the hiring form link and the Facebook link. The service list (names, descriptions, what's included) is in `SERVICES` right below it.
 
-- `phone` and `phoneDigits`: the business phone number
-- `email`: the inbox that should receive booking requests
-- `area`: the towns/neighborhoods served
+## Booking
 
-The service list (names, descriptions, what's included) is in `SERVICES` right below it.
+All "Book online" and "Book this" buttons go to the business's ZenMaid booking page, so bookings land in their existing scheduling system.
 
-## How booking works
-
-The booking form opens the customer's email app with their request filled in, addressed to the email in `CONFIG`. No server or account is needed. Later this can be swapped for a form service (Formspree, Google Forms) or a scheduling tool (Calendly, Square Appointments) so requests arrive even if the customer doesn't send the email.
-
-## Publishing with GitHub Pages
+itHub Pages
 
 In the repo on GitHub: **Settings → Pages → Source: Deploy from a branch → main / (root) → Save**. The site will be live at `https://<username>.github.io/RC/` in a minute or two.
 
