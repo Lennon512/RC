@@ -130,15 +130,33 @@ $("#site-footer").outerHTML = `
 // Services (home)
 const serviceList = $("#serviceList");
 if (serviceList) {
-  serviceList.innerHTML = SERVICES.map(s => `
-    <article class="service">
+  // Little line icons, one per service, in the same order as SERVICES
+  const ICONS = [
+    // house
+    '<path d="M6 21V11L16 4l10 7v10a1 1 0 0 1-1 1h-6v-7h-6v7H7a1 1 0 0 1-1-1z"/>',
+    // sparkles
+    '<path d="M14 4c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z"/><path d="M24 19c.5 2 1.5 3 3.5 3.5-2 .5-3 1.5-3.5 3.5-.5-2-1.5-3-3.5-3.5 2-.5 3-1.5 3.5-3.5z"/>',
+    // key
+    '<circle cx="11" cy="16" r="5"/><path d="M16 16h11M23 16v4M27 16v3"/>',
+    // briefcase
+    '<rect x="5" y="10" width="22" height="15" rx="2.5"/><path d="M12 10V7.5A1.5 1.5 0 0 1 13.5 6h5A1.5 1.5 0 0 1 20 7.5V10M5 16h22"/>',
+    // hanger
+    '<path d="M16 9a2.5 2.5 0 1 0-2.5-2.5M16 9v2L4.5 19.5A1.5 1.5 0 0 0 5.4 22h21.2a1.5 1.5 0 0 0 .9-2.5L16 11"/>',
+  ];
+  serviceList.innerHTML = SERVICES.map((s, i) => `
+    <article class="service tint-${i % 3}">
+      <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 32 32">${ICONS[i] || ICONS[1]}</svg></span>
       <h3>${s.name}</h3>
-      <div>
-        <p>${s.summary}</p>
-        <ul>${s.includes.map(x => `<li>${x}</li>`).join("")}</ul>
-      </div>
-      <a class="book-this" data-config="bookingLink">Book this</a>
-    </article>`).join("");
+      <p>${s.summary}</p>
+      <ul>${s.includes.map(x => `<li>${x}</li>`).join("")}</ul>
+      <a class="btn btn-small" data-config="bookingLink">Book this</a>
+    </article>`).join("") + `
+    <article class="service service-help">
+      <img src="images/logo.png" alt="">
+      <h3>Not sure which one?</h3>
+      <p>Tell us about your space and we'll help you pick. New clients get a free walkthrough and estimate.</p>
+      <a class="btn btn-small btn-pink" data-config="phoneLink">Call or text us</a>
+    </article>`;
 }
 
 // Towns

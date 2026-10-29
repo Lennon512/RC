@@ -259,3 +259,119 @@ details p { margin: 0 0 18px; color: var(--muted); max-width: 60ch; }
 
 /* "Roses" in the home headline: her name, so it stands out */
 .rose-name { font-weight: 700; color: var(--teal-deep); -webkit-text-stroke: .6px currentColor; }
+
+/* ==================================================================
+   Cute & colorful layer: pastel bands, sparkles, scallops, cards
+================================================================== */
+:root {
+  --cream: #FFF6F2;
+  --pink-soft: #FBE3E9;
+  --pink-mid: #F4C9D4;
+  --teal-soft: #DCEFEE;
+  --butter: #FBF0D9;
+  --sparkle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.9 6.4 4.6 10.1 12 12-7.4 1.9-11.1 5.6-12 12-.9-6.4-4.6-10.1-12-12C7.4 10.1 11.1 6.4 12 0z' fill='%23D795A6'/%3E%3C/svg%3E");
+  --sparkle-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.9 6.4 4.6 10.1 12 12-7.4 1.9-11.1 5.6-12 12-.9-6.4-4.6-10.1-12-12C7.4 10.1 11.1 6.4 12 0z' fill='%23C9A86A'/%3E%3C/svg%3E");
+}
+
+/* No plain white bands anywhere */
+.band-white { background: var(--butter); }
+.band-pink { background: var(--pink-soft); --band: var(--pink-soft); }
+.band-teal { background: var(--teal-soft); --band: var(--teal-soft); }
+.band-white { --band: var(--butter); }
+.site-header { background: rgba(255,246,242,.95); border-bottom: 3px dotted var(--pink-mid); }
+
+/* Scalloped edges */
+.scallop, .scallop-top { position: relative; }
+.scallop::after, .scallop-top::before {
+  content: ""; position: absolute; left: 0; right: 0; height: 18px; z-index: 1; pointer-events: none;
+  background-size: 36px 18px; background-repeat: repeat-x;
+}
+.scallop::after { bottom: -17px; background-image: radial-gradient(circle at 18px 0, var(--band) 17.5px, transparent 18.5px); }
+.scallop-top::before { top: -17px; background-image: radial-gradient(circle at 18px 18px, var(--band) 17.5px, transparent 18.5px); }
+
+/* Sparkle after every section title */
+.section-title::after, .page-hero h1::after {
+  content: ""; display: inline-block; width: .55em; height: .55em; margin-left: .3em;
+  background: var(--sparkle) center / contain no-repeat; vertical-align: .35em;
+}
+.book-panel .section-title::after { background-image: var(--sparkle-gold); }
+
+/* Hero sparkles + pink photo frame */
+.hero-photo { position: relative; }
+.hero-photo img { border-radius: 32px; box-shadow: 14px 14px 0 var(--pink-mid), -10px -10px 0 var(--teal-soft); border: 6px solid #fff; }
+.sparkle { position: absolute; background: var(--sparkle) center / contain no-repeat; z-index: 2; }
+.sparkle.s1 { width: 42px; height: 42px; top: -26px; right: 30px; }
+.sparkle.s2 { width: 24px; height: 24px; top: 4px; right: -6px; background-image: var(--sparkle-gold); }
+.sparkle.s3 { width: 30px; height: 30px; bottom: 40px; left: -22px; }
+.rose-name { color: #C2607C; }
+
+/* Pill buttons with a little bounce */
+.btn { box-shadow: 0 4px 0 rgba(31,42,68,.18); transition: transform .12s, box-shadow .12s, background .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(31,42,68,.18); }
+.btn:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(31,42,68,.18); }
+.btn-outline { background: #fff; }
+@media (prefers-reduced-motion: reduce) { .btn, .btn:hover, .btn:active { transform: none; } }
+
+/* Services as colorful cards */
+.service-list { border-top: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.service {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 28px; border: 0; border-radius: 28px;
+  background: #fff; box-shadow: 0 10px 0 var(--card-edge);
+}
+.service.tint-0 { background: #FFF9FA; --card-edge: var(--pink-mid); }
+.service.tint-1 { background: #F7FCFB; --card-edge: #B9DCDA; }
+.service.tint-2 { background: #FFFCF4; --card-edge: #EBD7A8; }
+.service-icon {
+  width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card-edge);
+}
+.service-icon svg { width: 32px; height: 32px; fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.service h3 { font-size: 1.55rem; }
+.service p { margin: 0; }
+.service ul { columns: 1; list-style: none; padding: 0; margin: 4px 0 8px; display: grid; gap: 4px; }
+.service li { padding-left: 24px; position: relative; }
+.service li::before { content: ""; position: absolute; left: 0; top: .35em; width: 14px; height: 14px; background: var(--sparkle) center / contain no-repeat; }
+.service .btn { margin-top: auto; align-self: flex-start; }
+
+/* Steps as little cards with pink number bubbles */
+.steps li { background: #fff; border-radius: 28px; padding: 76px 26px 28px; box-shadow: 0 8px 0 var(--pink-mid); }
+.steps li::before { top: 22px; left: 26px; background: var(--pink-soft); border: 2px dashed var(--pink); }
+
+/* Colorful town pills */
+.towns li { border: 0; background: #fff; box-shadow: 0 3px 0 var(--teal); }
+.towns li:nth-child(3n+2) { background: var(--pink-soft); box-shadow: 0 3px 0 var(--pink); }
+.towns li:nth-child(3n+3) { background: var(--butter); box-shadow: 0 3px 0 var(--gold); }
+
+/* Rounded FAQ bubbles */
+details { background: #fff; border: 0; border-radius: 20px; padding: 0 22px; margin-bottom: 12px; box-shadow: 0 4px 0 var(--pink-mid); }
+details p { margin-bottom: 20px; }
+
+/* Values, reviews, contact & traits get the same soft card treatment */
+.value { background: #fff; border-radius: 28px; padding: 28px; box-shadow: 0 8px 0 var(--pink-mid); }
+.value:nth-child(2) { box-shadow: 0 8px 0 #B9DCDA; }
+.value:nth-child(3) { box-shadow: 0 8px 0 #EBD7A8; }
+.value h3 { border-bottom: 2px dashed var(--pink); }
+.review { box-shadow: 0 8px 0 var(--pink-mid); border-top: 0; }
+.empty { border-radius: 32px; background: #fff; }
+.traits li { box-shadow: 0 5px 0 var(--teal); border: 0; }
+.traits li:nth-child(2) { color: #A84E6A; box-shadow: 0 5px 0 var(--pink); }
+.traits li:nth-child(3) { color: #7A5C22; box-shadow: 0 5px 0 var(--gold); }
+.team-photo img { border: 6px solid #fff; box-shadow: 12px 12px 0 var(--pink-mid); }
+.map { border: 6px solid #fff; box-shadow: 12px 12px 0 var(--teal-soft); }
+
+/* Booking panel: pink with a scalloped teal border feel */
+.book-panel { background: var(--teal-deep); box-shadow: 0 12px 0 var(--pink-mid); position: relative; overflow: hidden; }
+.book-panel::after {
+  content: ""; position: absolute; width: 220px; height: 220px; right: -60px; top: -70px;
+  background: var(--sparkle-gold) center / contain no-repeat; opacity: .25; pointer-events: none;
+}
+.book-panel > * { position: relative; z-index: 1; }
+
+/* Footer: deep teal instead of navy */
+.site-footer { background: #1E4F51; border-top: 6px solid var(--pink-mid); }
+.footer-bottom { border-top-color: #2F6B6D; color: #B8D3D2; }
+.footer-brand small { color: #B8D3D2; }
+.service-help { background: var(--pink-mid); box-shadow: 0 10px 0 var(--pink); align-items: center; text-align: center; justify-content: center; }
+.service-help img { width: 110px; height: 110px; }
+.service-help .btn { align-self: center; margin-top: 8px; }
