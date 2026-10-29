@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roses Cleaning Service</title>
+  <meta name="description" content="Roses Cleaning Service: home and office cleaning. See our services and book a cleaning online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%239E2A4B'/><path d='M16 9c-3 0-5 2-5 5 0 2 1 3 2 4-2 0-3 1-3 2 2 1 4 1 6 0 2 1 4 1 6 0 0-1-1-2-3-2 1-1 2-2 2-4 0-3-2-5-5-5z' fill='%23F7DDE3'/></svg>">
+</head>
+<body>
+  <a class="skip" href="#book">Skip to booking</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Roses Cleaning Service, home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" fill="var(--rose)"/>
+          <path d="M20 10c-4 0-6.5 2.8-6.5 6.4 0 2.4 1.3 4 2.7 5-2.4.2-4.2 1.4-4.6 3 2.6 1.5 5.6 1.6 8.4.2 2.8 1.4 5.8 1.3 8.4-.2-.4-1.6-2.2-2.8-4.6-3 1.4-1 2.7-2.6 2.7-5C26.5 12.8 24 10 20 10z" fill="var(--petal)"/>
+          <path d="M20 26v6" stroke="var(--petal)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>Roses Cleaning<br><small>Service</small></span>
+      </a>
+      <nav aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">Questions</a>
+        <a class="btn btn-small" href="#book">Book a cleaning</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>Come home to a house that smells like roses.</h1>
+          <p class="lede">Roses Cleaning Service cleans homes, apartments and offices, top to bottom. Pick a service, choose a day, and we'll confirm your visit.</p>
+          <ul class="hero-points">
+            <li>Standard, deep and move-out cleans</li>
+            <li>Weekly, every two weeks, monthly or one time</li>
+            <li>We bring our own supplies</li>
+          </ul>
+        </div>
+
+        <form class="quick-book" id="quickBook" aria-labelledby="qbTitle">
+          <h2 id="qbTitle">Start your booking</h2>
+          <label for="qbService">What do you need?</label>
+          <select id="qbService" name="service"></select>
+          <label for="qbDate">Preferred day</label>
+          <input id="qbDate" name="date" type="date" required>
+          <button class="btn" type="submit">Continue booking</button>
+          <p class="fine">No payment needed to request a visit.</p>
+        </form>
+      </div>
+      <svg class="petals" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 80 C 200 20, 400 120, 600 70 S 1000 10, 1200 60 L1200 120 L0 120 Z" fill="var(--paper)"/>
+      </svg>
+    </section>
+
+    <section id="services" class="services">
+      <div class="wrap">
+        <h2 class="section-title">Our services</h2>
+        <p class="section-intro">Every visit is cleaned to the same checklist, so you know what you're getting each time.</p>
+        <div class="service-list" id="serviceList"></div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <div class="wrap">
+        <h2 class="section-title">How booking works</h2>
+        <ol class="steps">
+          <li>
+            <h3>Send a request</h3>
+            <p>Pick your service, the day you'd like and a time window. Tell us about your home and anything we should know.</p>
+          </li>
+          <li>
+            <h3>We confirm</h3>
+            <p>We'll reach out by phone or text to confirm the time and give you a price for your home.</p>
+          </li>
+          <li>
+            <h3>We clean</h3>
+            <p>We arrive with our own supplies. You come home to a clean house.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="book" class="book">
+      <div class="wrap book-grid">
+        <div class="book-aside">
+          <h2 class="section-title">Book a cleaning</h2>
+          <p>Fill this out and we'll get back to you to confirm your visit and price.</p>
+          <div class="contact-card">
+            <p>Rather talk to someone?</p>
+            <a class="contact-line" data-config="phoneLink"><span data-config="phone"></span></a>
+            <a class="contact-line" data-config="emailLink"><span data-config="email"></span></a>
+            <a class="contact-line" data-config="facebookLink">Message us on Facebook</a>
+          </div>
+        </div>
+
+        <form class="booking" id="bookingForm" novalidate>
+          <fieldset>
+            <legend>Service</legend>
+            <div class="field">
+              <label for="service">Type of cleaning</label>
+              <select id="service" name="service" required></select>
+            </div>
+            <div class="field">
+              <span class="label" id="freqLabel">How often?</span>
+              <div class="chips" role="radiogroup" aria-labelledby="freqLabel">
+                <label><input type="radio" name="frequency" value="One time" checked><span>One time</span></label>
+                <label><input type="radio" name="frequency" value="Weekly"><span>Weekly</span></label>
+                <label><input type="radio" name="frequency" value="Every two weeks"><span>Every two weeks</span></label>
+                <label><input type="radio" name="frequency" value="Monthly"><span>Monthly</span></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="bedrooms">Bedrooms</label>
+                <select id="bedrooms" name="bedrooms">
+                  <option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bathrooms">Bathrooms</label>
+                <select id="bathrooms" name="bathrooms">
+                  <option>1</option><option>1.5</option><option selected>2</option><option>2.5</option><option>3</option><option>4+</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>When</legend>
+            <div class="row">
+              <div class="field">
+                <label for="date">Preferred day</label>
+                <input id="date" name="date" type="date" required>
+              </div>
+              <div class="field">
+                <label for="time">Time window</label>
+                <select id="time" name="time">
+                  <option>Morning (8–11)</option>
+                  <option>Midday (11–2)</option>
+                  <option>Afternoon (2–5)</option>
+                  <option>Any time</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>About you</legend>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="opt">(optional)</span></label>
+                <input id="email" name="email" type="email" autocomplete="email">
+              </div>
+            </div>
+            <div class="field">
+              <label for="address">Address</label>
+              <input id="address" name="address" autocomplete="street-address" required>
+            </div>
+            <div class="field">
+              <label for="notes">Anything we should know? <span class="opt">(optional)</span></label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Pets, gate codes, rooms to focus on…"></textarea>
+            </div>
+          </fieldset>
+
+          <p class="form-error" id="formError" role="alert" hidden></p>
+          <button class="btn btn-wide" type="submit">Send booking request</button>
+          <p class="fine">This opens your email app with your request filled in. Just press send.</p>
+        </form>
+
+        <div class="confirm" id="confirm" hidden tabindex="-1">
+          <h2>Booking request ready</h2>
+          <p>Your email app should have opened with your request. Press send and we'll be in touch to confirm.</p>
+          <p>Email didn't open? Call or text us at <a data-config="phoneLink"><span data-config="phone"></span></a> and we'll book you in.</p>
+          <button class="btn btn-ghost" type="button" id="editBooking">Edit my request</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="wrap narrow">
+        <h2 class="section-title">Questions</h2>
+        <details>
+          <summary>Do I need to be home?</summary>
+          <p>No. Many customers leave a key or a door code. Just tell us in the notes when you book.</p>
+        </details>
+        <details>
+          <summary>Do you bring cleaning supplies?</summary>
+          <p>Yes, we bring everything we need. If you'd like us to use your own products, let us know.</p>
+        </details>
+        <details>
+          <summary>How much does a cleaning cost?</summary>
+          <p>It depends on the size of your home and the service. Send a booking request and we'll give you a price before your visit.</p>
+        </details>
+        <details>
+          <summary>What areas do you serve?</summary>
+          <p data-config="area"></p>
+        </details>
+        <details>
+          <summary>How do I change or cancel?</summary>
+          <p>Call or text us as early as you can and we'll move your visit.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Roses Cleaning Service</p>
+      <p>
+        <a data-config="phoneLink"><span data-config="phone"></span></a><br>
+        <a data-config="emailLink"><span data-config="email"></span></a><br>
+        <a data-config="facebookLink">Facebook</a>
+      </p>
+      <p class="copy">© <span id="year"></span> Roses Cleaning Service</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
