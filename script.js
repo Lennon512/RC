@@ -211,17 +211,18 @@ if (field) {
 
     // Decorative sparkles and petals drift too
     const decor = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 16; i++) {
       const d = document.createElement("span");
-      d.className = i % 2 ? "drift drift-sparkle" : "drift drift-petal";
+      const sparkle = i % 4 === 3;
+      d.className = sparkle ? "drift drift-sparkle" : `drift drift-petal p${1 + (i % 3)}`;
       d.setAttribute("aria-hidden", "true");
-      d.style.setProperty("--s", (14 + Math.random() * 22).toFixed(0) + "px");
+      d.style.setProperty("--s", (sparkle ? 14 + Math.random() * 18 : 18 + Math.random() * 20).toFixed(0) + "px");
       field.appendChild(d);
       decor.push(d);
     }
 
     const calm = matchMedia("(prefers-reduced-motion: reduce)");
-    const items = [...bubbles.map(el => ({ el, big: true })), ...decor.map(el => ({ el, big: false }))];
+    const items = [...bubbles.map(el => ({ el, big: true })), ...decor.map(el => ({ el, big: false, petal: el.classList.contains("drift-petal") }))];
     let W = 0, H = 0, paused = false, last = 0;
 
     function place() {
@@ -245,8 +246,10 @@ if (field) {
     }
     function draw(it, t) {
       const wob = it.big ? Math.sin(t / 900 + it.phase) * 4 : Math.sin(t / 700 + it.phase) * 10;
-      const rot = it.big ? Math.sin(t / 1400 + it.phase) * 3 : (t / 40 + it.phase * 60) % 360;
-      it.el.style.transform = `translate(${it.x}px, ${it.y + wob}px) rotate(${rot}deg)`;
+      const rot = it.big ? Math.sin(t / 1400 + it.phase) * 3 : (t / (it.petal ? 90 : 40) + it.phase * 60) % 360;
+      // petals tumble: a slow flip so they look like they're catching the air
+      const flip = it.petal ? ` scaleX(${(0.35 + 0.65 * Math.abs(Math.cos(t / 1300 + it.phase))).toFixed(3)})` : "";
+      it.el.style.transform = `translate(${it.x}px, ${it.y + wob}px) rotate(${rot}deg)${flip}`;
     }
     function tick(t) {
       const dt = Math.min(0.05, (t - (last || t)) / 1000); last = t;
