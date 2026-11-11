@@ -10,6 +10,7 @@ const CONFIG = {
   bookingUrl: "https://app.zenmaid.com/book/rose-s-cleaning-services",
   hiringUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdFZkP_-sFJhsDRX-Dx2bTA3Bnm4qaAXDMvMHCeqAyC41mIOA/viewform?usp=header",
   facebook: "https://www.facebook.com/p/Roses-Cleaning-100066975405899/",
+  google: "https://www.google.com/maps/search/?api=1&query=Rose%27s+Cleaning+Services+Burnet+TX", // swap for her Google "Ask for reviews" link if she has one
   towns: ["Burnet", "Marble Falls", "Granite Shoals", "Kingsland", "Buchanan Dam", "Llano", "Burnet County", "Llano County", "Williamson County"],
 };
 
@@ -17,9 +18,17 @@ const CONFIG = {
    REVIEWS: paste real client reviews here, copied word for word
    (with the client's OK). The Reviews page shows them automatically.
    Example:
-   { text: "Their review here.", name: "Jane D.", where: "Marble Falls", stars: 5 },
+   { text: "Their review here.", name: "Jane D.", service: "Deep clean", source: "Google", stars: 5 },
 ================================================================== */
 const REVIEWS = [
+  {
+    text: "We have been using Rose's Cleaning Services for several years and are very pleased. Her team cleans and manages a short term rental for us also. They do a terrific job. Rose is always very responsive to any questions or concerns.",
+    name: "Becca S.", service: "Standard cleaning", source: "Google", stars: 5,
+  },
+  {
+    text: "I am incredibly grateful to have found a trustworthy team of true professionals for my home. Rose and her team are excellent communicators and execute the plans quickly, efficiently, and do an amazing job. I felt overwhelmed with an unorganized home. My home is now PERFECTLY organized and SPARKLING clean. I feel at peace in my home now and I get to feel like this regularly now!",
+    name: "Loren C.", service: "Moving-related cleaning, general housekeeping", source: "Google", stars: 5,
+  },
 ];
 
 const SERVICES = [
@@ -163,19 +172,124 @@ if (serviceList) {
 $$("[data-towns]").forEach(el => (el.innerHTML = CONFIG.towns.map(t => `<li>${t}</li>`).join("")));
 
 // Reviews
-const reviewList = $("#reviewList");
-if (reviewList) {
-  if (REVIEWS.length) {
-    reviewList.className = "review-grid";
-    reviewList.innerHTML = REVIEWS.map(r => `
-      <figure class="review">
-        ${r.stars ? `<div class="stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}</div>` : ""}
-        <blockquote>${esc(r.text)}</blockquote>
-        <figcaption>${esc(r.name)}${r.where ? `<span>${esc(r.where)}</span>` : ""}</figcaption>
-      </figure>`).join("");
-  } else {
+const starRow = n => `<span class="stars" aria-label="${n} out of 5 stars">${"★".repeat(n)}</span>`;
+const firstWords = (t, n) => { const w = t.split(/\s+/); return w.slice(0, n).join(" ") + (w.length > n ? "…" : ""); };
+
+// Home page: featured quote
+const featured = $("#featuredReview");
+if (featured && REVIEWS.length) {
+  const r = REVIEWS[0];
+  featured.innerHTML = `
+    <blockquote>${esc(r.text)}</blockquote>
+    <figcaption>${starRow(r.stars || 5)} ${esc(r.name)}${r.source ? `, on ${esc(r.source)}` : ""}</figcaption>`;
+  featured.hidden = false;
+}
+
+// Reviews page: floating bubbles you can click to read
+const field = $("#reviewField");
+if (field) {
+  if (!REVIEWS.length) {
+    field.hidden = true;
     $("#reviewEmpty").hidden = false;
+  } else {
+    const tints = ["pink", "teal", "butter"];
+    const bubbles = REVIEWS.map((r, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = `bubble bubble-${tints[i % 3]}`;
+      b.setAttribute("aria-label", `Read ${r.name}'s review`);
+      b.innerHTML = `
+        <span class="bubble-avatar" aria-hidden="true">${esc(r.name[0])}</span>
+        ${starRow(r.stars || 5)}
+        <span class="bubble-snip">“${esc(firstWords(r.text, 9))}”</span>
+        <span class="bubble-name">${esc(r.name)}</span>
+        <span class="bubble-tap" aria-hidden="true">Tap to read</span>`;
+      b.addEventListener("click", () => openReview(r));
+      field.appendChild(b);
+      return b;
+    });
+
+    // Decorative sparkles and petals drift too
+    const decor = [];
+    for (let i = 0; i < 10; i++) {
+      const d = document.createElement("span");
+      d.className = i % 2 ? "drift drift-sparkle" : "drift drift-petal";
+      d.setAttribute("aria-hidden", "true");
+      d.style.setProperty("--s", (14 + Math.random() * 22).toFixed(0) + "px");
+      field.appendChild(d);
+      decor.push(d);
+    }
+
+    const calm = matchMedia("(prefers-reduced-motion: reduce)");
+    const items = [...bubbles.map(el => ({ el, big: true })), ...decor.map(el => ({ el, big: false }))];
+    let W = 0, H = 0, paused = false, last = 0;
+
+    function place() {
+      W = field.clientWidth; H = field.clientHeight;
+      items.forEach((it, i) => {
+        it.w = it.el.offsetWidth; it.h = it.el.offsetHeight;
+        if (it.x == null) {
+          // spread bubbles across the field to start
+          const cols = Math.max(1, bubbles.length);
+          it.x = it.big ? ((i + 0.5) / cols) * (W - it.w) : Math.random() * (W - it.w);
+          it.y = it.big ? (0.2 + 0.5 * ((i * 0.37) % 1)) * (H - it.h) : Math.random() * (H - it.h);
+          const speed = it.big ? 14 + Math.random() * 10 : 10 + Math.random() * 14; // px per second
+          const a = Math.random() * Math.PI * 2;
+          it.vx = Math.cos(a) * speed; it.vy = Math.sin(a) * speed;
+          it.phase = Math.random() * 6.28;
+        }
+        it.x = Math.min(Math.max(0, it.x), Math.max(0, W - it.w));
+        it.y = Math.min(Math.max(0, it.y), Math.max(0, H - it.h));
+        draw(it, 0);
+      });
+    }
+    function draw(it, t) {
+      const wob = it.big ? Math.sin(t / 900 + it.phase) * 4 : Math.sin(t / 700 + it.phase) * 10;
+      const rot = it.big ? Math.sin(t / 1400 + it.phase) * 3 : (t / 40 + it.phase * 60) % 360;
+      it.el.style.transform = `translate(${it.x}px, ${it.y + wob}px) rotate(${rot}deg)`;
+    }
+    function tick(t) {
+      const dt = Math.min(0.05, (t - (last || t)) / 1000); last = t;
+      if (!paused) items.forEach(it => {
+        if (it.held) return;
+        it.x += it.vx * dt; it.y += it.vy * dt;
+        if (it.x < 0 || it.x > W - it.w) { it.vx *= -1; it.x = Math.min(Math.max(0, it.x), W - it.w); }
+        if (it.y < 0 || it.y > H - it.h) { it.vy *= -1; it.y = Math.min(Math.max(0, it.y), H - it.h); }
+        draw(it, t);
+      });
+      if (!calm.matches) requestAnimationFrame(tick);
+    }
+    // Hovering or focusing a bubble holds it still so it's easy to click
+    items.filter(it => it.big).forEach(it => {
+      const hold = v => () => (it.held = v);
+      it.el.addEventListener("pointerenter", hold(true));
+      it.el.addEventListener("pointerleave", hold(false));
+      it.el.addEventListener("focus", hold(true));
+      it.el.addEventListener("blur", hold(false));
+    });
+    document.addEventListener("visibilitychange", () => (paused = document.hidden));
+
+    if (calm.matches) {
+      field.classList.add("still");      // reduced motion: tidy static layout
+    } else {
+      requestAnimationFrame(() => { place(); requestAnimationFrame(tick); });
+      addEventListener("resize", place);
+    }
   }
+}
+
+// Review popup
+const dlg = $("#reviewDialog");
+function openReview(r) {
+  $("#rdStars").innerHTML = starRow(r.stars || 5);
+  $("#rdText").textContent = r.text;
+  $("#rdName").textContent = r.name;
+  $("#rdMeta").textContent = [r.service, r.source && `Review on ${r.source}`].filter(Boolean).join(" · ");
+  dlg.showModal();
+}
+if (dlg) {
+  $("#rdClose").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 }
 
 // Contact + link bindings (run last so injected header/footer get them too)
@@ -191,5 +305,6 @@ const bind = {
   bookingLink: el => { el.href = CONFIG.bookingUrl; external(el); },
   hiringLink: el => { el.href = CONFIG.hiringUrl; external(el); },
   facebookLink: el => { el.href = CONFIG.facebook; external(el); },
+  googleLink: el => { el.href = CONFIG.google; external(el); },
 };
 $$("[data-config]").forEach(el => bind[el.dataset.config]?.(el));
